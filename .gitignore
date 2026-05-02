@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Flask / backend (não vai pro GitHub Pages)
+app.py
+generator.py
+templates/
+static/
+
+# Claude Code (configurações locais da ferramenta)
+.claude/
+
+# Ambiente virtual
+venv/
+env/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
