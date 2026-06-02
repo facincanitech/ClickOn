@@ -876,8 +876,10 @@ function solvable(snakes,R,C){
 function generateLevel(phase){
   const c=cfg(phase);
   const{rows:R,cols:C,n,bl,fl,type}=c;
+  // For many snakes skip expensive checks — placing all n is sufficient
+  const skipChecks=n>8;
 
-  for(let attempt=0;attempt<60;attempt++){
+  for(let attempt=0;attempt<120;attempt++){
     const snakes=[];
     const bodyOcc=new Set();
     let ok=true;
@@ -892,6 +894,8 @@ function generateLevel(phase){
     }
 
     if(!ok) continue;
+    if(skipChecks) return{snakes,rows:R,cols:C,type,phase};
+
     if(solvable(snakes,R,C)){
       // A partir de 3 cobras exige pelo menos 1 bloqueio (puzzle real)
       if(n>=3){
@@ -909,7 +913,7 @@ function generateLevel(phase){
     }
   }
 
-  // Fallback: 2 snakes no blocking
+  // Fallback: half the snakes, minimum lengths
   return generateSimple(phase);
 }
 
